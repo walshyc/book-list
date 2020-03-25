@@ -44,7 +44,13 @@ UI.prototype.showAlert = function (message, type) {
     }, 3000)
 }
 
-// Event Listeners
+UI.prototype.deleteBook = function(target){
+    if (target.className === 'delete') {
+    target.parentElement.parentElement.remove()        
+    }
+}
+
+// Event Listener for add book
 document.getElementById('book-form').addEventListener('submit', function (e) {
     const title = document.getElementById('title').value
     const author = document.getElementById('author').value
@@ -64,5 +70,13 @@ document.getElementById('book-form').addEventListener('submit', function (e) {
         ui.showAlert('Your Book as been added', 'success')
         ui.clear()
     }
+    e.preventDefault()
+})
+
+// Event Listener for Delete
+document.getElementById('book-list').addEventListener('click', function(e) {
+    const ui = new UI()
+    ui.deleteBook(e.target)
+    ui.showAlert('Book has been deleted', 'success')
     e.preventDefault()
 })
